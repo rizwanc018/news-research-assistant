@@ -8,3 +8,21 @@ wheels/
 
 # Virtual environments
 .venv
+.env
+Note.md
+
+# Caches
+.cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Vector store / databases
+data/lancedb/
+*.lance
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
