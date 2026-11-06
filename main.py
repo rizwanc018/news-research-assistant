@@ -1,44 +1,47 @@
-from news_reasearch.chunking import chunk_articles
-from news_reasearch.embeddings import (
-    embed_chunks,
-    load_embedding_model,
-)
-from news_reasearch.preprocessing import load_articles, prepare_articles
-from news_reasearch.vector_store import store_chunks
+from news_reasearch.bm25_retrieval import bm25_search, load_bm25_index
+from news_reasearch.embeddings import load_embedding_model
+from news_reasearch.semantic_retrieval import semantic_search
+from news_reasearch.vector_store import connect_to_lancedb
 
-# Load and preprocess
-df = load_articles("data/raw/bbc-news.csv")
-articles = prepare_articles(df)
-
-# Generate chunks
-chunks = chunk_articles(
-    articles,
-    chunk_size=500,
-    overlap=75,
-)
-
-# Load embedding model
-
+db = connect_to_lancedb()
+table = db.open_table("news_chunks")
 model = load_embedding_model()
 
-embedded_chunks = embed_chunks(
+bm25_retriever = load_bm25_index()
+
+
+query = "What did Tony Blair say about the election?"
+
+
+results = semantic_search(
+    query=query,
     model=model,
-    chunks=chunks,
-    batch_size=32,
+    table=table,
+    top_k=5,
 )
 
-print("Total embedded chunks:", len(embedded_chunks))
+print("\nSEMANTIC_SEARCH_RESULT")
+for index, result in results.iterrows():
+    print(f"\nResult {index + 1}")
+    print("Article ID:", result["article_id"])
+    print("Category:", result["category"])
+    print("Cosine Distance:", result["_distance"])
+    print("Cosine Similarity:", 1 - result["_distance"])
+    print("Text:", result["chunk"])
+    print("-" * 80)
 
-print("\nFirst embedded chunk:")
-print("Chunk ID:", embedded_chunks[0]["chunk_id"])
-print("Category:", embedded_chunks[0]["category"])
-print("Vector dimensions:", len(embedded_chunks[0]["vector"]))
-print("First 5 values:", embedded_chunks[0]["vector"][:5])
 
+results = bm25_search(
+    query=query,
+    retriever=bm25_retriever,
+    top_k=5,
+)
 
-table = store_chunks(embedded_chunks)
-
-print("Total records stored:", table.count_rows())
-
-print("\nFirst stored record:")
-print(table.to_pandas().head(1))
+print("\nBM25_SEARCH_RESULT")
+for i, result in enumerate(results, start=1):
+    print(f"\nResult {i}")
+    print("Article ID:", result["article_id"])
+    print("Category:", result["category"])
+    print("BM25 Score:", result["bm25_score"])
+    print("Text:", result["chunk"])
+    print("-" * 80)

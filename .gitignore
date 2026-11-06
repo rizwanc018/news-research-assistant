@@ -22,6 +22,9 @@ Note.md
 data/lancedb/
 *.lance
 
+# Bm25 index
+data/bm25_index/
+
 # IDE / OS
 .idea/
 .vscode/

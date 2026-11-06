@@ -1,8 +1,6 @@
 from lancedb import Table
 from sentence_transformers import SentenceTransformer
 
-# from lancedb.table import Table
-
 
 def semantic_search(
     query: str, model: SentenceTransformer, table: Table, top_k: int = 5
