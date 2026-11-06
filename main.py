@@ -18,7 +18,6 @@ chunks = chunk_articles(
 )
 
 # Load embedding model
-model = load_embedding_model()
 
 model = load_embedding_model()
 
