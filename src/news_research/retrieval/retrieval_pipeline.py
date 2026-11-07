@@ -1,3 +1,4 @@
+from news_research.generation import generate_answer
 from news_research.query_parser import parse_query
 from news_research.reranker import rerank_results
 from news_research.retrieval.hybrid_retrieval import hybrid_search
@@ -12,7 +13,6 @@ def retrieve_news(
     top_k: int = 5,
     candidate_k: int = 20,
 ):
-    print(">> Parsing querry...")
     parsed_query = parse_query(query)
 
     if parsed_query.intent == "out_of_scope":
@@ -21,7 +21,6 @@ def retrieve_news(
             "results": [],
         }
 
-    print("Retriving...")
     hybrid_results = hybrid_search(
         query=parsed_query.search_query,
         model=model,
@@ -32,7 +31,6 @@ def retrieve_news(
         category=parsed_query.category,
     )
 
-    print("Reranking...")
     reranked_results = rerank_results(
         query=query,
         results=hybrid_results,
@@ -40,7 +38,13 @@ def retrieve_news(
         top_k=top_k,
     )
 
+    answer = generate_answer(
+        query=query,
+        results=reranked_results,
+    )
+
     return {
         "parsed_query": parsed_query,
         "results": reranked_results,
+        "answer": answer,
     }

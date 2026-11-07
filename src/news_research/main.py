@@ -22,14 +22,12 @@ response = retrieve_news(
     reranker=reranker,
 )
 
-print("Parsed query:")
+print("\nParsed query:")
 print(response["parsed_query"].model_dump())
 
-print("\nFinal results:")
+print("\nAnswer:")
+print(response["answer"])
 
-for rank, result in enumerate(response["results"], start=1):
-    print(f"\nRank: {rank}")
-    print("Chunk ID:", result["chunk_id"])
-    print("RRF score:", result["rrf_score"])
-    print("Rerank score:", result["rerank_score"])
-    print("Chunk:", result["chunk"][:200])
+print("\nSources:")
+for result in response["results"]:
+    print(result["article_id"], result["chunk_id"])

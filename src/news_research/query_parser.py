@@ -2,7 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from news_research.config import client
+from news_research.config import MODEL_NAME, client
 
 
 class ParsedQuery(BaseModel):
@@ -21,7 +21,7 @@ class ParsedQuery(BaseModel):
 
 def parse_query(query: str) -> ParsedQuery:
     response = client.responses.parse(
-        model="gpt-5-mini",
+        model=MODEL_NAME,
         input=[
             {
                 "role": "system",

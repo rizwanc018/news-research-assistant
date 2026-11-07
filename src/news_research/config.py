@@ -18,3 +18,4 @@ TABLE_NAME = "news_chunks"
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 
 client = OpenAI()
+MODEL_NAME = "gpt-5-mini"
