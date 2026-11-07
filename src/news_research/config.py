@@ -1,10 +1,9 @@
-"""Central configuration: project paths and shared constants.
-
-All paths are resolved relative to the project root so the code works
-regardless of the current working directory.
-"""
-
 from pathlib import Path
+
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,3 +16,5 @@ BM25_INDEX_PATH = DATA_DIR / "bm25_index"
 
 TABLE_NAME = "news_chunks"
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
+
+client = OpenAI()

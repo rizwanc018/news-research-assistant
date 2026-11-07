@@ -1,10 +1,3 @@
-"""Quick demo: run semantic, BM25, and hybrid search over the built indexes.
-
-Prereqs: run scripts/build_embeddings.py and scripts/build_bm25_index.py first.
-
-    uv run python scripts/demo_search.py
-"""
-
 from news_research.embeddings import load_embedding_model
 from news_research.retrieval.bm25_retrieval import bm25_search, load_bm25_index
 from news_research.retrieval.hybrid_retrieval import hybrid_search
