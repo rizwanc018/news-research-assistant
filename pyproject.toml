@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-news-research = "news_research.cli:main"
+news-research = "news_research.main:main"
 
 [build-system]
 requires = ["uv_build>=0.13.4,<0.14.0"]
