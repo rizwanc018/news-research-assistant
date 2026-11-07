@@ -1,3 +1,5 @@
+from networkx import display
+
 from news_reasearch.bm25_retrieval import bm25_search, load_bm25_index
 from news_reasearch.embeddings import load_embedding_model
 from news_reasearch.semantic_retrieval import semantic_search
@@ -21,14 +23,15 @@ results = semantic_search(
 )
 
 print("\nSEMANTIC_SEARCH_RESULT")
-for index, result in results.iterrows():
-    print(f"\nResult {index + 1}")
-    print("Article ID:", result["article_id"])
-    print("Category:", result["category"])
-    print("Cosine Distance:", result["_distance"])
-    print("Cosine Similarity:", 1 - result["_distance"])
-    print("Text:", result["chunk"])
-    print("-" * 80)
+display(results)
+# for index, result in results.iterrows():
+#     print(f"\nResult {index + 1}")
+#     print("Article ID:", result["article_id"])
+#     print("Category:", result["category"])
+#     print("Cosine Distance:", result["_distance"])
+#     print("Cosine Similarity:", 1 - result["_distance"])
+#     print("Text:", result["chunk"])
+#     print("-" * 80)
 
 
 results = bm25_search(
