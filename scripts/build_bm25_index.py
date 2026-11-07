@@ -1,8 +1,8 @@
-from news_reasearch.retrieval.bm25_retrieval import (
+from news_research.retrieval.bm25_retrieval import (
     get_bm25_retriever,
     load_bm25_documents,
 )
-from news_reasearch.vector_store import connect_to_lancedb
+from news_research.vector_store import connect_to_lancedb
 
 db = connect_to_lancedb()
 table = db.open_table("news_chunks")

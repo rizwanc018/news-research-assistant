@@ -1,4 +1,4 @@
-from news_reasearch.retrieval.bm25_retrieval import bm25_search, load_bm25_index
+from news_research.retrieval.bm25_retrieval import bm25_search, load_bm25_index
 
 bm25_retriever = load_bm25_index()
 

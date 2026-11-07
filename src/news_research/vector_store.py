@@ -1,14 +1,10 @@
-from pathlib import Path
-
 import lancedb
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DB_PATH = PROJECT_ROOT / "data" / "lancedb"
-TABLE_NAME = "news_chunks"
+from news_research.config import LANCEDB_PATH, TABLE_NAME
 
 
 def connect_to_lancedb():
-    return lancedb.connect(DB_PATH)
+    return lancedb.connect(LANCEDB_PATH)
 
 
 def store_chunks(embedded_chunks: list[dict]):

@@ -1,6 +1,6 @@
-from news_reasearch.embeddings import load_embedding_model
-from news_reasearch.retrieval.semantic_retrieval import semantic_search
-from news_reasearch.vector_store import connect_to_lancedb
+from news_research.embeddings import load_embedding_model
+from news_research.retrieval.semantic_retrieval import semantic_search
+from news_research.vector_store import connect_to_lancedb
 
 model = load_embedding_model()
 

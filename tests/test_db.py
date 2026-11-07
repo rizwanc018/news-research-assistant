@@ -1,4 +1,4 @@
-from news_reasearch.vector_store import connect_to_lancedb
+from news_research.vector_store import connect_to_lancedb
 
 db = connect_to_lancedb()
 

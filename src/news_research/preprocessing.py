@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 
-def load_articles(path: str) -> pd.DataFrame:
+def load_articles(path: str | Path) -> pd.DataFrame:
     """Load news articles from a CSV file."""
     return pd.read_csv(path)
 

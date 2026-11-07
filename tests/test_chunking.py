@@ -1,10 +1,6 @@
-from pathlib import Path
-
-from news_reasearch.chunking import chunk_articles
-from news_reasearch.preprocessing import load_articles, prepare_articles
-
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-DATASET_PATH = PROJECT_ROOT / "data" / "raw" / "bbc-news.csv"
+from news_research.chunking import chunk_articles
+from news_research.config import DATASET_PATH
+from news_research.preprocessing import load_articles, prepare_articles
 
 df = load_articles(DATASET_PATH)
 articles = prepare_articles(df)

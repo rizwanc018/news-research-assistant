@@ -1,13 +1,14 @@
-from news_reasearch.chunking import chunk_articles
-from news_reasearch.embeddings import (
+from news_research.chunking import chunk_articles
+from news_research.config import DATASET_PATH
+from news_research.embeddings import (
     embed_chunks,
     load_embedding_model,
 )
-from news_reasearch.preprocessing import load_articles, prepare_articles
-from news_reasearch.vector_store import store_chunks
+from news_research.preprocessing import load_articles, prepare_articles
+from news_research.vector_store import store_chunks
 
 # Load and preprocess
-df = load_articles("data/raw/bbc-news.csv")
+df = load_articles(DATASET_PATH)
 articles = prepare_articles(df)
 
 # Generate chunks

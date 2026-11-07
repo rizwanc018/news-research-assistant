@@ -2,8 +2,8 @@ import bm25s
 from lancedb import Table
 from sentence_transformers import SentenceTransformer
 
-from news_reasearch.retrieval.bm25_retrieval import bm25_search
-from news_reasearch.retrieval.semantic_retrieval import semantic_search
+from news_research.retrieval.bm25_retrieval import bm25_search
+from news_research.retrieval.semantic_retrieval import semantic_search
 
 
 def reciprocal_rank_fusion(

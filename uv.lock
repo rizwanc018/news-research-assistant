@@ -709,7 +709,7 @@ wheels = [
 ]
 
 [[package]]
-name = "news-reasearch"
+name = "news-research"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

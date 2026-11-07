@@ -1,7 +1,7 @@
-from news_reasearch.embeddings import load_embedding_model
-from news_reasearch.retrieval.bm25_retrieval import load_bm25_index
-from news_reasearch.retrieval.hybrid_retrieval import hybrid_search
-from news_reasearch.vector_store import connect_to_lancedb
+from news_research.embeddings import load_embedding_model
+from news_research.retrieval.bm25_retrieval import load_bm25_index
+from news_research.retrieval.hybrid_retrieval import hybrid_search
+from news_research.vector_store import connect_to_lancedb
 
 db = connect_to_lancedb()
 table = db.open_table("news_chunks")

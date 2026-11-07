@@ -1,11 +1,11 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-MODEL_NAME = "BAAI/bge-base-en-v1.5"
+from news_research.config import EMBEDDING_MODEL
 
 
 def load_embedding_model():
-    return SentenceTransformer(MODEL_NAME)
+    return SentenceTransformer(EMBEDDING_MODEL)
 
 
 def generate_embeddings(

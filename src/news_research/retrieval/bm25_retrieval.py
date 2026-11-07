@@ -2,8 +2,7 @@ from pathlib import Path
 
 import bm25s
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-BM25_INDEX_PATH = PROJECT_ROOT / "data" / "bm25_index"
+from news_research.config import BM25_INDEX_PATH
 
 
 def load_bm25_documents(table) -> list[dict]:
