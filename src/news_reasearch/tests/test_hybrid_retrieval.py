@@ -1,6 +1,6 @@
-from news_reasearch.bm25_retrieval import load_bm25_index
 from news_reasearch.embeddings import load_embedding_model
-from news_reasearch.hybrid_retrieval import hybrid_search
+from news_reasearch.retrieval.bm25_retrieval import load_bm25_index
+from news_reasearch.retrieval.hybrid_retrieval import hybrid_search
 from news_reasearch.vector_store import connect_to_lancedb
 
 db = connect_to_lancedb()
@@ -18,6 +18,7 @@ results = hybrid_search(
     bm25_retriever=bm25_retriever,
     top_k=10,
     candidate_k=20,
+    category="politics",
 )
 
 for i, result in enumerate(results, start=1):
@@ -30,3 +31,7 @@ for i, result in enumerate(results, start=1):
     print("BM25 Rank:", result["bm25_rank"])
     print("Text:", result["chunk"][:300])
     print("-" * 80)
+
+assert all(result["category"] == "politics" for result in results)
+
+print("Hybrid metadata filtering works!")

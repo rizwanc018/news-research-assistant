@@ -1,4 +1,4 @@
-from news_reasearch.bm25_retrieval import (
+from news_reasearch.retrieval.bm25_retrieval import (
     get_bm25_retriever,
     load_bm25_documents,
 )

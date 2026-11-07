@@ -1,8 +1,8 @@
 from networkx import display
 
-from news_reasearch.bm25_retrieval import bm25_search, load_bm25_index
 from news_reasearch.embeddings import load_embedding_model
-from news_reasearch.semantic_retrieval import semantic_search
+from news_reasearch.retrieval.bm25_retrieval import bm25_search, load_bm25_index
+from news_reasearch.retrieval.semantic_retrieval import semantic_search
 from news_reasearch.vector_store import connect_to_lancedb
 
 db = connect_to_lancedb()

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import bm25s
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 BM25_INDEX_PATH = PROJECT_ROOT / "data" / "bm25_index"
 
 
@@ -68,7 +68,12 @@ def get_bm25_retriever(documents: list[dict]):
     save_bm25_index(retriever)
 
 
-def bm25_search(query: str, retriever, top_k: int = 5) -> list[dict]:
+def bm25_search(
+    query: str,
+    retriever,
+    top_k: int = 5,
+    category: str | None = None,
+) -> list[dict]:
     """Retrieve news chunks using BM25."""
 
     query_tokens = bm25s.tokenize(
@@ -87,11 +92,17 @@ def bm25_search(query: str, retriever, top_k: int = 5) -> list[dict]:
         matched_documents[0],
         scores[0],
     ):
+        if category is not None and document["category"] != category:
+            continue
+
         results.append(
             {
                 **document,
                 "bm25_score": float(score),
             }
         )
+
+        if len(results) == top_k:
+            break
 
     return results

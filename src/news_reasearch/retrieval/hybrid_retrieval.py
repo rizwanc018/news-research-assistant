@@ -2,8 +2,8 @@ import bm25s
 from lancedb import Table
 from sentence_transformers import SentenceTransformer
 
-from news_reasearch.bm25_retrieval import bm25_search
-from news_reasearch.semantic_retrieval import semantic_search
+from news_reasearch.retrieval.bm25_retrieval import bm25_search
+from news_reasearch.retrieval.semantic_retrieval import semantic_search
 
 
 def reciprocal_rank_fusion(
@@ -75,18 +75,21 @@ def hybrid_search(
     bm25_retriever: bm25s.BM25,
     top_k: int = 10,
     candidate_k: int = 10,
+    category: str | None = None,
 ) -> list[dict]:
     semantic_results = semantic_search(
         query=query,
         model=model,
         table=table,
         top_k=candidate_k,
+        category=category,
     )
 
     bm25_results = bm25_search(
         query=query,
         retriever=bm25_retriever,
         top_k=candidate_k,
+        category=category,
     )
 
     fused_results = reciprocal_rank_fusion(

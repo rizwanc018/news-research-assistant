@@ -1,5 +1,5 @@
 from news_reasearch.embeddings import load_embedding_model
-from news_reasearch.semantic_retrieval import semantic_search
+from news_reasearch.retrieval.semantic_retrieval import semantic_search
 from news_reasearch.vector_store import connect_to_lancedb
 
 model = load_embedding_model()
@@ -14,7 +14,10 @@ results = semantic_search(
     model=model,
     table=table,
     top_k=5,
+    category="politics",
 )
+
+print(results[["article_id", "category", "_distance"]])
 
 for index, result in results.iterrows():
     print(f"\nResult {index + 1}")
